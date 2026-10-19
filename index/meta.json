@@ -1,0 +1,10 @@
+{
+  "embedding_model": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+  "embedding_dim": 384,
+  "chunk_count": 39,
+  "document_count": 39,
+  "chunk_size": 800,
+  "chunk_overlap": 120,
+  "build_seconds": 5.05,
+  "kb_dir": "/Users/dsgnxu/ucheba/quantum_rag/knowledge_base"
+}
