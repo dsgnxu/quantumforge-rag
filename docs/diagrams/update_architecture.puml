@@ -1,0 +1,29 @@
+@startuml
+title QuantumForge RAG — ежедневное обновление индекса (Задание 6)
+
+actor Scheduler as cron
+rectangle "Источник данных" {
+  folder "data/incoming/*.md" as incoming
+  folder "knowledge_base/" as kb
+}
+rectangle "Скрипт update_index.py" as script
+rectangle "Chunking\n(chunk_size=800, overlap=120)" as chunks
+rectangle "Embeddings\nall-MiniLM-L6-v2" as emb
+database "FAISS index\nindex/faiss.index" as faiss
+file "logs/index_update.log" as log
+
+cron --> script : cron 0 6 * * *\nили Docker loop 24h
+incoming --> script : новые/изменённые файлы
+script --> kb : copy/ingest
+kb --> chunks
+chunks --> emb
+emb --> faiss : rebuild / upsert
+script --> log : время, N files, chunks, errors
+
+note right of log
+  Пример:
+  index updated at 2025-07-17,
+  3 files added, 0 errors
+end note
+
+@enduml

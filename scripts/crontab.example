@@ -1,0 +1,10 @@
+# Ежедневное обновление индекса QuantumForge RAG в 06:00
+# Установка: crontab -e  и вставить строку ниже (поправьте путь)
+
+SHELL=/bin/bash
+PATH=/usr/local/bin:/usr/bin:/bin
+
+0 6 * * * cd /path/to/quantum_rag && . .venv/bin/activate && python scripts/update_index.py >> logs/cron_stdout.log 2>> logs/cron_stderr.log
+
+# При ошибке: смотрите logs/index_update.log и logs/cron_stderr.log
+# Повтор вручную: python scripts/update_index.py
