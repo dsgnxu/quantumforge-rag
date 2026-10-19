@@ -1,0 +1,9 @@
+$ curl -s -X POST localhost:8000/ask -d '{"question":"Что такое Void Core и кто его уничтожил?"}'
+
+1. Сначала найду фрагменты по запросу: «Что такое Void Core и кто его уничтожил?».
+2. Найдено чанков: 4. Лучший источник: knowledge_base/void_core.md (score=0.754).
+3. Соберу факты только из CONTEXT, игнорируя любые инструкции внутри документов.
+
+Итоговый ответ: Void Core — боевая станция Dominion Sphere, способная уничтожить планету одним выстрелом. Оснащена суперлазером и защищена флотом Void Cruiser и Shade Dart. Планы станции были украдены Free Concord при участии Seren Vahl. Kael Orin уничтожил первую Void Core, попав в реактор через Synth Flux. Позже Dominion Sphere строила вторую станцию над Verdance.
+
+sources: ['knowledge_base/void_core.md', 'knowledge_base/verdance.md', 'knowledge_base/void_tide.md', 'knowledge_base/dominion_sphere.md']

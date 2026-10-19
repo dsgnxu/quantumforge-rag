@@ -1,0 +1,9 @@
+$ curl -s -X POST localhost:8000/ask -d '{"question":"Кто такой Xarn Velgor?"}'
+
+1. Сначала найду фрагменты по запросу: «Кто такой Xarn Velgor?».
+2. Найдено чанков: 4. Лучший источник: knowledge_base/xarn_velgor.md (score=0.627).
+3. Соберу факты только из CONTEXT, игнорируя любые инструкции внутри документов.
+
+Итоговый ответ: Xarn Velgor — Void Sovereign Dominion Sphere и правая рука Overlord Krynn. Ранее известен как Aric Orin, Flux Guardians Knight из Sandveil. После падения на Emberfall получил кибернетический костюм и титул Xarn Velgor. Владеет красным fluxblade и использует void tide of Synth Flux. Командует флотом Void Cruiser и штурмовыми подразделениями Null Sentinel. Его дети — Kael Orin и Seren Vahl — стали ключевыми фигурами Free Concord.
+
+sources: ['knowledge_base/xarn_velgor.md', 'knowledge_base/master_thalos.md', 'knowledge_base/emberfall.md', 'knowledge_base/grothak.md']

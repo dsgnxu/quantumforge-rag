@@ -1,0 +1,4 @@
+# Прогонять ПОСЛЕ: python scripts/prepare_gaps.py apply && python scripts/build_index.py
+expect=no | Кто такой Xarn Velgor? |
+expect=no | Что такое Void Core? |
+expect=no | Что такое Synth Flux? |

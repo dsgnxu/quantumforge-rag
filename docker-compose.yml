@@ -1,0 +1,55 @@
+services:
+  rag-bot:
+    build: .
+    container_name: quantumforge-rag-bot
+    ports:
+      - "8000:8000"
+    environment:
+      LLM_MODE: extractive
+      ENABLE_INJECTION_FILTER: "true"
+      ENABLE_SECURITY_PREPROMPT: "true"
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN:-}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+    volumes:
+      - ./knowledge_base:/app/knowledge_base
+      - ./index:/app/index
+      - ./logs:/app/logs
+      - ./data/incoming:/app/data/incoming
+    restart: unless-stopped
+
+  # Опционально: Telegram-бот тем же образом
+  telegram-bot:
+    build: .
+    container_name: quantumforge-telegram-bot
+    profiles: ["telegram"]
+    environment:
+      LLM_MODE: extractive
+      TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
+      ENABLE_INJECTION_FILTER: "true"
+    volumes:
+      - ./knowledge_base:/app/knowledge_base
+      - ./index:/app/index
+      - ./logs:/app/logs
+    command: ["python", "bot/telegram_bot.py"]
+    restart: unless-stopped
+
+  # Ежедневное обновление индекса (симуляция cron)
+  index-updater:
+    build: .
+    container_name: quantumforge-index-updater
+    profiles: ["updater"]
+    environment:
+      ENABLE_INJECTION_FILTER: "true"
+    volumes:
+      - ./knowledge_base:/app/knowledge_base
+      - ./index:/app/index
+      - ./logs:/app/logs
+      - ./data/incoming:/app/data/incoming
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - |
+        echo "Updater loop started (every 24h). First run now..."
+        while true; do
+          python scripts/update_index.py || echo "update failed, will retry next cycle"
+          sleep 86400
+        done

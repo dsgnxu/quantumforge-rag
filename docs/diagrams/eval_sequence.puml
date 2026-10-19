@@ -1,0 +1,38 @@
+@startuml
+title Sequence: оценка покрытия RAG (Задание 7)
+
+actor Tester
+participant "evaluate.py" as Eval
+participant "RAG ask()" as RAG
+participant "FAISS retriever" as Ret
+participant "Security filters" as Sec
+participant "LLM / extractive" as LLM
+database "logs/*.jsonl" as Logs
+
+Tester -> Eval : загрузить golden_questions.txt
+loop для каждого вопроса
+  Eval -> RAG : question + expect
+  RAG -> Ret : embedding + top_k search
+  alt пустой индекс / низкий score
+    Ret --> RAG : []
+    RAG --> Eval : «Я не знаю»
+  else найдены чанки
+    Ret --> RAG : chunks + scores
+    RAG -> Sec : injection filter
+    alt вредоносный чанк/запрос
+      Sec --> RAG : block
+      RAG --> Eval : «Я не знаю» + filtered
+    else ok
+      Sec --> RAG : safe chunks
+      RAG -> LLM : prompt (few-shot + CoT)
+      LLM --> RAG : answer
+      RAG --> Eval : answer + sources
+    end
+  end
+  Eval -> Logs : query, status, sources, length
+  Eval -> Eval : сравнить с expect=yes/no/filter
+end
+
+Eval --> Tester : coverage_report.md + CSV
+
+@enduml
