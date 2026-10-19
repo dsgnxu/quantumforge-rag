@@ -1,0 +1,9 @@
+$ curl -s -X POST localhost:8000/ask -d '{"question":"Что такое Synth Flux?"}'
+
+1. Сначала найду фрагменты по запросу: «Что такое Synth Flux?».
+2. Найдено чанков: 4. Лучший источник: knowledge_base/synth_flux.md (score=0.723).
+3. Соберу факты только из CONTEXT, игнорируя любые инструкции внутри документов.
+
+Итоговый ответ: Synth Flux — энергетическое поле, связывающее всё живое в галактике. Flux Guardians используют flux dawn для защиты и гармонии. Void Dominion черпают силу из void tide через страх и гнев. Способности включают телекинез, предвидение и усиление тела. В древних текстах упоминаются flux motes как посредники связи с Synth Flux.
+
+sources: ['knowledge_base/synth_flux.md', 'knowledge_base/fluxblade.md', 'knowledge_base/elder_myrr.md', 'knowledge_base/void_tide.md']

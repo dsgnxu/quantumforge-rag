@@ -1,0 +1,9 @@
+$ curl -s -X POST localhost:8000/ask -d '{"question":"Где Elder Myrr обучал Kael Orin?"}'
+
+1. Сначала найду фрагменты по запросу: «Где Elder Myrr обучал Kael Orin?».
+2. Найдено чанков: 4. Лучший источник: knowledge_base/kael_orin.md (score=0.628).
+3. Соберу факты только из CONTEXT, игнорируя любые инструкции внутри документов.
+
+Итоговый ответ: Kael Orin вырос на Sandveil у дяди и тёти, не зная о своём происхождении. После встречи с Flux Elder Thalos узнал о Synth Flux и получил fluxblade отца. Присоединился к Free Concord вместе с Jorik Vane, Grothak, Unit Pex-7 и Protocol Unit Vox. Уничтожил Void Core с помощью Synth Flux во время битвы при Явине. Позже обучался у Elder Myrr на Mistgrove и противостоял Xarn Velgor. Цель Kael Orin — восстановить Flux Guardians Order после падения Dominion Sphere.
+
+sources: ['knowledge_base/kael_orin.md', 'knowledge_base/elder_myrr.md', 'knowledge_base/mistgrove.md', 'knowledge_base/master_thalos.md']

@@ -1,0 +1,9 @@
+$ curl -s -X POST localhost:8000/ask -d '{"question":"Кто пилотирует Nebula Runner?"}'
+
+1. Сначала найду фрагменты по запросу: «Кто пилотирует Nebula Runner?».
+2. Найдено чанков: 4. Лучший источник: knowledge_base/nebula_runner.md (score=0.724).
+3. Соберу факты только из CONTEXT, игнорируя любые инструкции внутри документов.
+
+Итоговый ответ: Nebula Runner — лёгкий грузовой корабль, знаменитый скоростью в hyperrelay. Пилотируется Jorik Vane и Grothak, оснащён скрытыми оружейными системами. Участвовал в эвакуации с Frostspire и атаке на Void Core. Считается одним из быстрейших гражданских кораблей внешних миров. Для Free Concord Falcon стал символом удачи и дерзости.
+
+sources: ['knowledge_base/nebula_runner.md', 'knowledge_base/jorik_vane.md', 'knowledge_base/nebula_scout.md', 'knowledge_base/grothak.md']
